@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import type { Recipe } from "./types";
 import { formatPrepTime } from "./formatPrepTime";
 
@@ -10,7 +11,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+    <Link to={`/recipes/${recipe.id}`} className="block bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       {imgError ? (
         <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">
           <span className="text-4xl">🍽</span>
@@ -35,6 +36,6 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
           <span className="text-gray-500">{formatPrepTime(recipe.prepTime)}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

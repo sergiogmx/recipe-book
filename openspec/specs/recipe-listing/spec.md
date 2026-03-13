@@ -35,7 +35,7 @@ The system SHALL display filtered recipes in a responsive grid layout: 1 column 
 - **THEN** a filter bar with search input and category dropdown is visible between the header and the grid
 
 ### Requirement: Recipe card displays key information
-Each recipe card SHALL display the recipe image, name, category, difficulty, and preparation time.
+Each recipe card SHALL display the recipe image, name, category, difficulty, and preparation time. Each card SHALL be a clickable link that navigates to the recipe detail page.
 
 #### Scenario: Card content
 - **WHEN** a recipe is rendered as a card
@@ -49,6 +49,10 @@ Each recipe card SHALL display the recipe image, name, category, difficulty, and
 #### Scenario: Image load failure
 - **WHEN** a recipe image fails to load
 - **THEN** the card SHALL display a fallback placeholder instead of a broken image
+
+#### Scenario: Card navigates to detail
+- **WHEN** the user clicks on a recipe card
+- **THEN** the system SHALL navigate to `/recipes/:id` where `:id` is the recipe's ID
 
 ### Requirement: Page header
 The recipes page SHALL display a header with the application title "Recipe Book" and a brief description.
