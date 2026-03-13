@@ -16,7 +16,7 @@ The system SHALL fetch all recipes from `GET /recipes` using RTK Query when the 
 - **THEN** the system SHALL display an error message indicating the recipes could not be loaded
 
 ### Requirement: Display recipe cards in a grid
-The system SHALL display all recipes in a responsive grid layout: 1 column on mobile, 2 columns on tablet (md), and 3 columns on desktop (lg).
+The system SHALL display filtered recipes in a responsive grid layout: 1 column on mobile, 2 columns on tablet (md), and 3 columns on desktop (lg). A filter bar with search input and category dropdown SHALL be displayed between the page header and the recipe grid.
 
 #### Scenario: Desktop layout
 - **WHEN** the viewport is >= 1024px wide
@@ -29,6 +29,10 @@ The system SHALL display all recipes in a responsive grid layout: 1 column on mo
 #### Scenario: Mobile layout
 - **WHEN** the viewport is < 768px wide
 - **THEN** recipes are displayed in a single column
+
+#### Scenario: Filter bar placement
+- **WHEN** the recipes page is displayed
+- **THEN** a filter bar with search input and category dropdown is visible between the header and the grid
 
 ### Requirement: Recipe card displays key information
 Each recipe card SHALL display the recipe image, name, category, difficulty, and preparation time.

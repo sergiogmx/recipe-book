@@ -1,8 +1,28 @@
-import { useGetRecipesQuery } from "./recipesApi";
+import { useMemo, useState } from "react";
+import { useGetRecipesQuery, useGetCategoriesQuery } from "./recipesApi";
 import { RecipeCard } from "./RecipeCard";
+import { RecipeFilters } from "./RecipeFilters";
 
 export function RecipesPage() {
   const { data: recipes, isLoading, error } = useGetRecipesQuery();
+  const { data: categories, error: categoriesError } = useGetCategoriesQuery();
+
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const filteredRecipes = useMemo(() => {
+    if (!recipes) return [];
+    return recipes.filter((recipe) => {
+      const searchLower = search.toLowerCase();
+      const matchesSearch =
+        !search ||
+        recipe.name.toLowerCase().includes(searchLower) ||
+        recipe.description.toLowerCase().includes(searchLower);
+      const matchesCategory =
+        !selectedCategory || recipe.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [recipes, search, selectedCategory]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -29,11 +49,37 @@ export function RecipesPage() {
         )}
 
         {recipes && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {recipes.map((recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
-            ))}
-          </div>
+          <>
+            <RecipeFilters
+              search={search}
+              onSearchChange={setSearch}
+              category={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+              categories={categories}
+              categoriesError={!!categoriesError}
+            />
+
+            <p className="mt-4 text-sm text-gray-500">
+              {filteredRecipes.length} recetas encontradas
+            </p>
+
+            {filteredRecipes.length > 0 ? (
+              <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {filteredRecipes.map((recipe) => (
+                  <RecipeCard key={recipe.id} recipe={recipe} />
+                ))}
+              </div>
+            ) : (
+              <div className="mt-12 text-center">
+                <p className="text-lg text-gray-500">
+                  No se encontraron recetas con los filtros seleccionados.
+                </p>
+                <p className="mt-1 text-sm text-gray-400">
+                  Intenta ajustar tu búsqueda o cambiar la categoría.
+                </p>
+              </div>
+            )}
+          </>
         )}
       </main>
     </div>
