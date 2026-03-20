@@ -55,8 +55,19 @@ Each recipe card SHALL display the recipe image, name, category, difficulty, and
 - **THEN** the system SHALL navigate to `/recipes/:id` where `:id` is the recipe's ID
 
 ### Requirement: Page header
-The recipes page SHALL display a header with the application title "Recipe Book" and a brief description.
+The recipes page SHALL display a header with the application title "Recipe Book", a brief description, and a button to navigate to the recipe creation form.
 
 #### Scenario: Page header visible
-- **WHEN** the recipes page is displayed
-- **THEN** a header with "Recipe Book" title is visible at the top of the page
+- **GIVEN** the user is on the recipes listing
+- **WHEN** the page is displayed
+- **THEN** a header with "Recipe Book" title SHALL be visible at the top of the page
+
+#### Scenario: Create recipe button
+- **GIVEN** the user is on the recipes listing
+- **WHEN** the page is displayed
+- **THEN** a "Nueva Receta" button SHALL be visible in the page header that navigates to `/recipes/new`
+
+#### Scenario: Create button navigates correctly
+- **GIVEN** the user is on the recipes listing
+- **WHEN** the user clicks the "Nueva Receta" button
+- **THEN** the system SHALL navigate to `/recipes/new`

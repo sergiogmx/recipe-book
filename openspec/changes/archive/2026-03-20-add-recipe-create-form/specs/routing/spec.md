@@ -1,4 +1,4 @@
-## ADDED Requirements
+## MODIFIED Requirements
 
 ### Requirement: Client-side routing
 The application SHALL use React Router to handle client-side navigation between the recipe listing, recipe detail, and recipe creation pages without full page reloads.
@@ -27,10 +27,3 @@ The application SHALL use React Router to handle client-side navigation between 
 - **GIVEN** the application is running
 - **WHEN** the user navigates to an undefined route
 - **THEN** the system SHALL redirect to `/`
-
-### Requirement: Router configuration
-The router SHALL be configured in a dedicated `src/router.tsx` file using `createBrowserRouter` and rendered via `<RouterProvider>` in `App.tsx`.
-
-#### Scenario: Router setup
-- **WHEN** the application initializes
-- **THEN** `App.tsx` SHALL render `<RouterProvider>` with the router defined in `src/router.tsx`

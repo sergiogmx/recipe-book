@@ -2,6 +2,13 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useGetRecipeByIdQuery } from "./recipesApi";
 import { formatPrepTime } from "./formatPrepTime";
+import type { Recipe } from "./types";
+
+function getWhatsAppUrl(recipe: Recipe) {
+  const recipeUrl = `${window.location.origin}/recipes/${recipe.id}`;
+  const message = `${recipe.name} (${recipe.category})\n\n${recipeUrl}`;
+  return `https://wa.me/?text=${encodeURIComponent(message)}`;
+}
 
 export function RecipeDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -64,6 +71,14 @@ export function RecipeDetailPage() {
               <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600">
                 {formatPrepTime(recipe.prepTime)}
               </span>
+              <a
+                href={getWhatsAppUrl(recipe)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-full bg-green-600 px-3 py-1 text-sm font-medium text-white hover:bg-green-700"
+              >
+                Compartir por WhatsApp
+              </a>
             </div>
 
             <p className="mt-4 text-gray-700 leading-relaxed">{recipe.description}</p>

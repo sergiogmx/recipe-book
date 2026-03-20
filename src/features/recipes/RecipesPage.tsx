@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { useGetRecipesQuery, useGetCategoriesQuery } from "./recipesApi";
 import { RecipeCard } from "./RecipeCard";
 import { RecipeFilters } from "./RecipeFilters";
@@ -28,10 +29,20 @@ export function RecipesPage() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm">
         <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Recipe Book</h1>
-          <p className="mt-2 text-gray-600">
-            Descubre nuestras recetas favoritas de la cocina mexicana
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Recipe Book</h1>
+              <p className="mt-2 text-gray-600">
+                Descubre nuestras recetas favoritas de la cocina mexicana
+              </p>
+            </div>
+            <Link
+              to="/recipes/new"
+              className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-amber-700"
+            >
+              Nueva Receta
+            </Link>
+          </div>
         </div>
       </header>
 
